@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trix · Clip it after it happens</title>
+  <meta name="description" content="Trix keeps the last 15 seconds of your screen and saves them as a clip when you press a key. Free and open source, for Windows.">
+  <meta name="theme-color" content="#05070c">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Trix · Clip it after it happens">
+  <meta property="og:description" content="Trix keeps the last 15 seconds of your screen and saves them as a clip when you press a key. Free and open source, for Windows.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <main>
+    <header class="hero">
+      <div class="brand">
+        <svg viewBox="264 252 562 494" aria-hidden="true">
+          <path fill="currentColor" d="M397.5 343.5L397.5 297.2A40.7 40.7 0 0 1 458.4 261.9L798.4 456.2A45 45 0 0 1 799.9 533.4L476.1 735A36.4 36.4 0 0 1 420.5 704.1L420.5 699.9L738.9 495.3L482.3 343.5z"/>
+          <path fill="#095ded" d="M495 404.5L585.4 404.5L738.9 495.3L495 652.1z"/>
+          <path fill="#0ae7fb" d="M269 343.5L482.3 343.5L585.4 404.5L495 404.5L495 652.1L420.5 699.9L420.5 404.5L328 404.5z"/>
+        </svg>
+        <span>TRIX</span>
+      </div>
+
+      <h1>Clip it <em>after</em> it happens.</h1>
+
+      <p class="lede">
+        Trix keeps the last 15 seconds of your screen.
+        <span class="nowrap">Press <kbd>Alt</kbd>&thinsp;+&thinsp;<kbd>F10</kbd></span> and they're a clip. Your GPU does the recording, so your game keeps its frames.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-primary" id="download" href="https://github.com/tnhnblgl/trix/releases/latest">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v11.5M6.5 10l5.5 5.5 5.5-5.5M4.5 20h15"/></svg>
+          <span><b>Download</b><small id="download-meta">Windows · latest release</small></span>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/tnhnblgl/trix">
+          <svg viewBox="0 0 16 16" aria-hidden="true" class="filled"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span><b>View on GitHub</b><small>Source, issues and releases</small></span>
+        </a>
+      </div>
+
+      <p class="fine">Windows 10 &amp; 11 <i>·</i> 64-bit <i>·</i> Free and open source</p>
+    </header>
+
+    <section class="stage" aria-label="The Trix app">
+      <div class="scene">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="slab">
+          <div class="face front">
+            <img src="app.webp" width="1472" height="947" fetchpriority="high"
+                 alt="The Trix app's Clips page: a grid of recorded game clips with their length, size and frame rate.">
+            <div class="glare" aria-hidden="true"></div>
+          </div>
+          <div class="face back" aria-hidden="true"></div>
+          <div class="side top" aria-hidden="true"></div>
+          <div class="side bottom" aria-hidden="true"></div>
+          <div class="side left" aria-hidden="true"></div>
+          <div class="side right" aria-hidden="true"></div>
+          <div class="reflection" aria-hidden="true"><img src="app.webp" width="1472" height="947" alt=""></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    Trix is MIT licensed <i>·</i> <a href="https://github.com/tnhnblgl/trix">github.com/tnhnblgl/trix</a>
+  </footer>
+</body>
+</html>

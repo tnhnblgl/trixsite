@@ -1,0 +1,511 @@
+:root {
+  --bg: #05070c;
+  --text: #eef2f8;
+  --muted: #95a0b5;
+  --faint: #677188;
+  --blue: #095ded;
+  --cyan: #0ae7fb;
+  --line: rgba(255, 255, 255, 0.1);
+  --ease-out: cubic-bezier(0.16, 0.84, 0.2, 1);
+  --font: "Segoe UI Variable Display", "Segoe UI Variable Text", "Segoe UI", system-ui,
+    -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  color: var(--text);
+  /* No background here: html has it, and one on body would paint over the
+     backdrop layer below. */
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---- Background: glow, dot grid and grain behind everything ------------- */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 40% at 50% 0%, rgba(9, 93, 237, 0.16), transparent 70%),
+    radial-gradient(30% 30% at 85% 20%, rgba(10, 231, 251, 0.07), transparent 70%),
+    radial-gradient(35% 35% at 12% 35%, rgba(9, 93, 237, 0.08), transparent 70%),
+    var(--bg);
+}
+
+.backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1.6px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(60% 55% at 50% 30%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(60% 55% at 50% 30%, #000 20%, transparent 75%);
+}
+
+.backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Hero ---------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(40px, 10vh, 112px) 20px 0;
+}
+
+.hero > * {
+  animation: up 0.9s var(--ease-out) both;
+}
+.hero > :nth-child(2) { animation-delay: 0.06s; }
+.hero > :nth-child(3) { animation-delay: 0.12s; }
+.hero > :nth-child(4) { animation-delay: 0.18s; }
+.hero > :nth-child(5) { animation-delay: 0.24s; }
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.brand svg {
+  display: block;
+  height: 19px;
+  width: auto;
+}
+
+h1 {
+  margin: 26px 0 0;
+  font-size: clamp(2.6rem, 1.1rem + 5.2vw, 5.4rem);
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+h1 em {
+  font-style: normal;
+  padding-right: 0.04em;
+  background: linear-gradient(100deg, var(--cyan) 5%, #3b8cff 55%, var(--blue) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lede {
+  margin: 22px 0 0;
+  max-width: 35rem;
+  font-size: clamp(1.02rem, 0.92rem + 0.4vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: balance;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+kbd {
+  display: inline-block;
+  font: inherit;
+  font-size: 0.82em;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+  padding: 0.05em 0.45em 0.1em;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ---- Buttons ------------------------------------------------------------- */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 240px;
+  padding: 13px 24px 13px 18px;
+  border-radius: 14px;
+  text-align: left;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s, background-color 0.25s;
+}
+
+.btn svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn svg.filled {
+  fill: currentColor;
+  stroke: none;
+}
+
+.btn b {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.btn small {
+  display: block;
+  margin-top: 1px;
+  font-size: 12.5px;
+  color: rgba(238, 242, 248, 0.7);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #2b85ff, var(--blue));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 0 0 1px rgba(10, 231, 251, 0.35),
+    0 14px 40px -12px rgba(9, 93, 237, 0.95);
+}
+
+.btn-primary small {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.btn-primary:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 0 1px rgba(10, 231, 251, 0.6),
+    0 20px 50px -12px rgba(9, 93, 237, 1);
+}
+
+/* A light sweep across the Download button on hover. */
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+
+.btn-primary:hover::after {
+  transform: translateX(120%);
+  transition: transform 0.8s var(--ease-out);
+}
+
+.btn-ghost {
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.13);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.085);
+}
+
+.fine {
+  margin: 20px 0 0;
+  font-size: 13px;
+  color: var(--faint);
+}
+
+.fine i,
+.foot i {
+  font-style: normal;
+  margin: 0 0.45em;
+  opacity: 0.6;
+}
+
+/* ---- The app window in 3D -------------------------------------------------
+   A slab with a real front, back and four edges, so it reads as an object
+   rather than a picture. main.js sets --rx/--ry (tilt), --gx/--gy (where the
+   glare sits) and --refl (how much reflection shows). */
+
+/* Clipped, because a tilted slab reaches past its own box, and the browser
+   would otherwise make the page scrollable that far -- a distance that
+   changes with every tilt, so the scrollbar would change with the mouse.
+   The padding keeps the glow and the reflection clear of the clip. */
+.stage {
+  --w: min(1120px, 92vw);
+  --h: calc(var(--w) * 947 / 1472);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  overflow: clip;
+  margin-top: calc(clamp(28px, 7vh, 72px) - 80px);
+  padding-top: 80px;
+  padding-bottom: calc(var(--h) * 0.4 + 60px);
+}
+
+.scene {
+  --d: 14px;
+  --r: 10px;
+  position: relative;
+  perspective: 1700px;
+  perspective-origin: 50% 10%;
+  animation: rise 1.5s var(--ease-out) 0.2s both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(90px);
+  }
+}
+
+.glow {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: calc(var(--w) * 1.15);
+  height: 85%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(9, 93, 237, 0.55), rgba(10, 231, 251, 0.1) 60%, transparent);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.slab {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 22deg)) rotateY(var(--ry, 0deg));
+  will-change: transform;
+}
+
+.face,
+.side {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.front {
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--r);
+  background: #0b0d12;
+  transform: translateZ(calc(var(--d) / 2));
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09);
+}
+
+.front img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(65% 55% at var(--gx, 50%) var(--gy, 10%), rgba(255, 255, 255, 0.13), transparent 65%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent 35%);
+}
+
+.back {
+  inset: 0;
+  border-radius: var(--r);
+  background: #0a0c11;
+  transform: rotateY(180deg) translateZ(calc(var(--d) / 2));
+}
+
+/* Edges are inset by the corner radius so no square corner pokes out
+   past the rounded front. */
+.side {
+  left: 50%;
+  top: 50%;
+}
+
+.top,
+.bottom {
+  width: calc(var(--w) - 2 * var(--r));
+  height: var(--d);
+  margin: calc(var(--d) / -2) 0 0 calc((var(--w) - 2 * var(--r)) / -2);
+}
+
+.top {
+  background: linear-gradient(90deg, #1f2430, #3a4252 50%, #1f2430);
+  transform: rotateX(90deg) translateZ(calc(var(--h) / 2));
+}
+
+.bottom {
+  background: linear-gradient(90deg, #0b0e14, #1a2030 50%, #0b0e14);
+  transform: rotateX(-90deg) translateZ(calc(var(--h) / 2));
+}
+
+.left,
+.right {
+  width: var(--d);
+  height: calc(var(--h) - 2 * var(--r));
+  margin: calc((var(--h) - 2 * var(--r)) / -2) 0 0 calc(var(--d) / -2);
+  background: linear-gradient(180deg, #2a303d, #11141b);
+}
+
+.left {
+  transform: rotateY(-90deg) translateZ(calc(var(--w) / 2));
+}
+
+.right {
+  transform: rotateY(90deg) translateZ(calc(var(--w) / 2));
+}
+
+/* A mirrored copy of the window's lower part, under it. Mirroring flips the
+   face, so it must not hide its back like the other faces do. */
+.reflection {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 18px);
+  width: 100%;
+  height: 40%;
+  overflow: hidden;
+  border-radius: var(--r);
+  opacity: calc(var(--refl, 0) * 0.5);
+  transform: translateZ(calc(var(--d) / 2)) scaleY(-1);
+  filter: blur(3px);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 95%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 95%);
+  pointer-events: none;
+}
+
+.reflection img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: var(--h);
+}
+
+/* ---- Footer -------------------------------------------------------------- */
+
+.foot {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px 36px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--faint);
+}
+
+.foot a {
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.foot a:hover {
+  color: var(--text);
+}
+
+/* ---- Small screens ------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .btn {
+    min-width: 0;
+  }
+
+  .scene {
+    --d: 8px;
+    --r: 6px;
+    perspective: 900px;
+  }
+
+  .fine i {
+    margin: 0 0.3em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero > *,
+  .scene {
+    animation: none;
+  }
+
+  .btn,
+  .btn-primary:hover::after {
+    transition: none;
+  }
+}
